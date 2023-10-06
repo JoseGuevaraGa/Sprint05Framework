@@ -1,0 +1,52 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>CRUD Sucursal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+<header th:fragment="header">
+
+    <h1>Insertar registro</h1>
+    <div class="container">
+        <div class="col-sm-6">
+            <form th:action="@{/save}" th:object=${sucursal} method="POST">
+                <div class="card">
+                    <div class="card-header"></div>
+                    <h3>Modulo Sucursal</h3>
+                    <div class="card-body"></div>
+                    <div class="form-group">
+                        <label>ID</label>
+                        <input th:field="*{pk_SucursalID}" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>SUCURSALES</label>
+                        <input th:field="*{nomSucursal}" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>PAIS</label>
+                        <input th:field="*{paisSucursal}" type="text" class="form-control"/>
+                    </div>
+                    <div class="card-footer">
+                        <input type="submit" value="Guardar" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+
+
+    </div>
+</header>
+
+<footer th:fragment="footer" class="bg-dark text-center text-white fixed-bottom">
+    <div class="container">
+        <p>Copyright Jose Guevara 2023</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</footer>
+</body>
+</html>
