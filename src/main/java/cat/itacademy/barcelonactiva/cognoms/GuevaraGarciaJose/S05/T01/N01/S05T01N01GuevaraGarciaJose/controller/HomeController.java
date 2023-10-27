@@ -1,8 +1,11 @@
 package cat.itacademy.barcelonactiva.cognoms.GuevaraGarciaJose.S05.T01.N01.S05T01N01GuevaraGarciaJose.controller;
 
-import cat.itacademy.barcelonactiva.cognoms.GuevaraGarciaJose.S05.T01.N01.S05T01N01GuevaraGarciaJose.model.Sucursal;
-import cat.itacademy.barcelonactiva.cognoms.GuevaraGarciaJose.S05.T01.N01.S05T01N01GuevaraGarciaJose.service.SucursalService;
+import cat.itacademy.barcelonactiva.cognoms.GuevaraGarciaJose.S05.T01.N01.S05T01N01GuevaraGarciaJose.model.Dado;
+import cat.itacademy.barcelonactiva.cognoms.GuevaraGarciaJose.S05.T01.N01.S05T01N01GuevaraGarciaJose.model.Tirada;
+import cat.itacademy.barcelonactiva.cognoms.GuevaraGarciaJose.S05.T01.N01.S05T01N01GuevaraGarciaJose.model.Usuario;
+import cat.itacademy.barcelonactiva.cognoms.GuevaraGarciaJose.S05.T01.N01.S05T01N01GuevaraGarciaJose.service.UsuarioService;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -17,59 +20,72 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model){
-        List<Sucursal>sucursales= sucursalService.getAll();
-        model.addAttribute("sucursales", sucursales);
+        List<Usuario>usuarios= usuarioService.getAll();
+        model.addAttribute("usuarios", usuarios);
         return "home";
     }
 
     @GetMapping("/agregar")
     public String agregar(Model model){
-        model.addAttribute("sucursal", new Sucursal());
+        model.addAttribute("usuario", new Usuario());
         return "form";
     }
-
     @PostMapping("/save")
-    public String save(@Validated Sucursal s, Model model){
-        sucursalService.saveSucursal(s);
+    public String save(@Validated Usuario s, Model model){
+        usuarioService.saveUsuario(s);
         return "redirect:/";
 
     }
 
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable long id, Model model){
-        Optional<Sucursal>sucursal= Optional.ofNullable(sucursalService.getPk_SucursalID(id));
-        model.addAttribute("sucursal", sucursal);
+
+        Optional<Usuario>usuario= Optional.ofNullable(usuarioService.getUsuarioID(id));
+        model.addAttribute("usuario", usuario);
         return "form";
     }
 
     @GetMapping("/eliminar/{id}")
     public String eliminar(Model model, @PathVariable long id){
-        sucursalService.delete(id);;
+        usuarioService.delete(id);;
         return "redirect:/";
 
     }
     @Autowired
-    private SucursalService sucursalService;
+    private UsuarioService usuarioService;
 
 
-    @GetMapping("/sucursal/getAll")
-    public List<Sucursal> getAll() {
-        return sucursalService.getAll();
+    @GetMapping("/usuario/getAll")
+    public List<Usuario> getAll() {
+        return usuarioService.getAll();
     }
 
-    @PutMapping("/sucursal/update")
-    public Sucursal updateSucursal(@RequestBody Sucursal sucursal){
-        return sucursalService.updateSucursal(sucursal);
+    @PutMapping("/usuario/update")
+    public Usuario updateUsuario(@RequestBody Usuario usuario){
+        return usuarioService.updateUsuario(usuario);
     }
 
-    @GetMapping("/sucursal/getOne/{id}")
-    public Sucursal getOne(@PathVariable Long id) {
-        return sucursalService.getPk_SucursalID(id);
+    @GetMapping("/usuario/getOne/{id}")
+    public Usuario getOne(@PathVariable Long id) {
+        return usuarioService.getUsuarioID(id);
     }
 
-    @DeleteMapping("/sucursal/delete/{id}")
+    @DeleteMapping("/usuario/delete/{id}")
     public void delete(@RequestBody Long id){
-        sucursalService.delete(id);
+        usuarioService.delete(id);
+    }
+
+    @GetMapping("/nuevaTirada")
+    public String nuevaTirada(Model model){
+        model.addAttribute("usuario", new Usuario());
+        List<Usuario>usuarios= usuarioService.getAll();
+        model.addAttribute("usuarios", usuarios);
+
+        
+        //*int jugadas = usuarioService.lanzarD();
+        model.addAttribute("jugadas", usuarioService.lanzarD());
+
+        return "form1";
     }
 
 }

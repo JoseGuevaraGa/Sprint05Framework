@@ -11,22 +11,22 @@
     <h1>Insertar registro</h1>
     <div class="container">
         <div class="col-sm-6">
-            <form th:action="@{/save}" th:object=${sucursal} method="POST">
+            <form th:action="@{/save}" th:object=${usuario} method="POST">
                 <div class="card">
                     <div class="card-header"></div>
-                    <h3>Modulo Sucursal</h3>
+                    <h3>Registro Usuario</h3>
                     <div class="card-body"></div>
                     <div class="form-group">
                         <label>ID</label>
-                        <input th:field="*{pk_SucursalID}" type="text" class="form-control"/>
+                        <input th:field="*{idusuario}" type="text" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label>SUCURSALES</label>
-                        <input th:field="*{nomSucursal}" type="text" class="form-control"/>
+                        <label>Nombre Usuario</label>
+                        <input th:field="*{nombreUsuario}" type="text" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label>PAIS</label>
-                        <input th:field="*{paisSucursal}" type="text" class="form-control"/>
+                        <label>Fecha Registro</label>
+                        <input th:field="*{fechaRegistro}" type="text" class="form-control"/>
                     </div>
                     <div class="card-footer">
                         <input type="submit" value="Guardar" class="btn btn-success">

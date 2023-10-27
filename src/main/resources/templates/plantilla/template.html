@@ -7,33 +7,18 @@
   </head>
 <body>
   <header th:fragment="header">
-    <nav class="navbar navbar-expand-lg bg-primary">
+
+    <nav class="navbar navbar-expand-lg bg-dark text-white">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Sucursal Pepe</a>
+
+        <a class="navbar-brand text-white" href="#">Juego Dados</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Opción 1</a></li>
-                <li><a class="dropdown-item" href="#">Opción 2</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Opción 3</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
             </li>
           </ul>
           <form class="d-flex" role="search">
@@ -43,25 +28,27 @@
         </div>
       </div>
     </nav>
-    <h1>Pagina pepe</h1>
+    <h1>Registro de usuarios</h1>
     <div class="container">
-      <a th:href="@{/agregar}" class="btn btn-primary">Agregar</a>
+      <a th:href="@{/agregar}" class="btn btn-primary">Alta Usuario</a>
+
       <table class="table">
         <thead>
         <tr>
-          <th>ID Sucursal</th>
-          <th>Nombre Sucursal</th>
-          <th>Pais Sucursal</th>
+          <th>ID Usuario</th>
+          <th>Nombre Usuario</th>
+          <th>Fecha Registro</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="sucursal:${sucursales}">
-          <td th:text="${sucursal.pk_SucursalID}"></td>
-          <td th:text="${sucursal.nomSucursal}"></td>
-          <td th:text="${sucursal.paisSucursal}"></td>
+        <tr th:each="usuario:${usuarios}">
+          <td th:text="${usuario.idusuario}"></td>
+          <td th:text="${usuario.nombreUsuario}"></td>
+          <td th:text="${usuario.fechaRegistro}"></td>
           <td>
-            <a th:href="@{/editar/}+${sucursal.pk_SucursalID}" class="btn btn-warning">Editar</a>
-            <a th:href="@{/eliminar/}+${sucursal.pk_SucursalID}"  class="btn btn-danger">Eliminar</a>
+            <a th:href="@{/editar/}+${usuario.idusuario}" class="btn btn-warning">Editar</a>
+            <a th:href="@{/eliminar/}+${usuario.idusuario}"  class="btn btn-danger">Eliminar</a>
+            <a th:href="@{/nuevaTirada}"  class="btn btn-primary">Jugar Dados</a>
           </td>
         </tr>
         </tbody>

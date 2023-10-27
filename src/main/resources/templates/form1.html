@@ -1,0 +1,68 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>CRUD Sucursal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+<header th:fragment="header">
+
+    <h1>Jugar</h1>
+    <div class="container">
+        <h4>Presiona boton para jugar</h4>
+        <a th:href="@{/update}" class="btn btn-primary">Jugar</a>
+
+        <table class = "table table-dark bdr">
+            <thead>
+            <tr>
+                <th scope = "col">Jugada</th>
+            </tr>
+            </thead>
+            <tbody>
+          <!--  <tr th:each="jugada:${jugadas}">
+
+                <td th:text = "${jugada.jugadas}"></td>
+            </tr>  -->
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="container-fluid col-md-6 col-sml-12">
+        <h4 >Posiciones:</h4>
+        <table class = "table table-dark bdr">
+            <thead>
+            <tr>
+                <th scope = "col">ID Usuario</th>
+                <th scope = "col">Nombre Usuario</th>
+                <th scope = "col">Juegos Ganados</th>
+                <th scope = "col">Porcentaje de Exito</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="usuario:${usuarios}">
+                <td th:text = "${usuario.idusuario}"></td>
+                <td th:text = "${usuario.nombreUsuario}"></td>
+                <td th:text = "${usuario.juegosGanados}"></td>
+                <td th:text = "${usuario.porcentajeAciertos}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+
+    </div>
+
+</header>
+
+<footer th:fragment="footer" class="bg-dark text-center text-white fixed-bottom">
+    <div class="container">
+        <p>Copyright Jose Guevara 2023</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</footer>
+</body>
+</html>
