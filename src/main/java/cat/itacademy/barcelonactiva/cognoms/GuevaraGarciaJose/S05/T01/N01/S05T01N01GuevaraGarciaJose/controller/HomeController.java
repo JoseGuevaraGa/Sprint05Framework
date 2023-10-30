@@ -15,8 +15,13 @@ import org.springframework.ui.Model;
 import java.util.List;
 import java.util.Optional;
 
+
+
 @Controller
 public class HomeController {
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping("/")
     public String index(Model model){
@@ -34,7 +39,6 @@ public class HomeController {
     public String save(@Validated Usuario s, Model model){
         usuarioService.saveUsuario(s);
         return "redirect:/";
-
     }
 
     @GetMapping("/editar/{id}")
@@ -51,9 +55,6 @@ public class HomeController {
         return "redirect:/";
 
     }
-    @Autowired
-    private UsuarioService usuarioService;
-
 
     @GetMapping("/usuario/getAll")
     public List<Usuario> getAll() {
@@ -81,12 +82,27 @@ public class HomeController {
         List<Usuario>usuarios= usuarioService.getAll();
         model.addAttribute("usuarios", usuarios);
 
-        
-        //*int jugadas = usuarioService.lanzarD();
-        model.addAttribute("jugadas", usuarioService.lanzarD());
-
         return "form1";
     }
+
+    @GetMapping("/jugar/{id}")
+    public String jugar(Model model, @PathVariable Long id){
+        int dado1 = usuarioService.lanzarD();
+        int dado2 = usuarioService.lanzarD();
+        if (dado1 + dado2 == 7){
+            Usuario usuario = usuarioService.getUsuarioID(id);
+            usuario.setJuegosGanados(usuario.getJuegosGanados() + 1);
+        } else {
+            Usuario usuario = usuarioService.getUsuarioID(id);
+            int perdidos = 0;
+            //perdidos = usuario.getJuegosPerdidos();
+            //usuario.setJuegosPerdidos(perdidos + 1);
+        }
+        model.addAttribute("usuarios", usuarioService.getAll());
+        return "form1";
+    }
+
+
 
 }
 
